@@ -4,6 +4,22 @@ An end-to-end SQL, Python, forecasting, and Power BI project using **published N
 
 This project contains **no patient-level records**. It does not estimate individual length of stay or an individual's ED-to-ward transfer time.
 
+## Power BI report preview
+
+These images show the three pages of the completed report. [View the full PDF](powerbi/NHS-Emergency-Demand-Capacity-Analytics.pdf), [download the report data](powerbi/data/), or [read the rebuild guide](powerbi/BUILD_GUIDE.md). The [live Power BI report](https://app.powerbi.com/groups/me/reports/1b968d56-f28b-4835-8f77-d6d0dac681f2) requires access to its private workspace.
+
+### Emergency demand
+
+![Power BI page showing monthly emergency admissions and decision-to-admit waits over 12 hours](powerbi/images/report-page-1.png)
+
+### Bed pressure
+
+![Power BI page showing quarterly general-and-acute bed occupancy and the trust bed snapshot](powerbi/images/report-page-2.png)
+
+### Admission forecast
+
+![Power BI page comparing actual admissions with two forecasts and showing forecast error](powerbi/images/report-page-3.png)
+
 ## Sources and scope
 
 | NHS England publication | Used for | Coverage in this project |
@@ -67,6 +83,6 @@ The baseline performed better and is the preferred demonstration forecast: **535
 
 ## Outputs and Power BI
 
-`outputs/powerbi/` contains `monthly_demand.csv`, `quarterly_beds.csv`, `trust_beds_2026q2.csv`, `source_summary.csv`, `admissions_forecast_backtest.csv`, and `admissions_forecast_summary.csv`. Five tables (all except the one-row validation-only `source_summary.csv`) feed the [three-page Power BI report](https://app.powerbi.com/groups/me/reports/1b968d56-f28b-4835-8f77-d6d0dac681f2), created and checked in October 2026. The live report is in a private Power BI workspace and requires workspace access. A [static PDF of all three pages](powerbi/NHS-Emergency-Demand-Capacity-Analytics.pdf) is available publicly; the [Power BI report notes](powerbi/BUILD_GUIDE.md) describe its visuals and how to rebuild it from the exports. The generated CSVs and native service report are not stored in Git.
+`outputs/powerbi/` contains `monthly_demand.csv`, `quarterly_beds.csv`, `trust_beds_2026q2.csv`, `source_summary.csv`, `admissions_forecast_backtest.csv`, and `admissions_forecast_summary.csv`. A snapshot of these six aggregate exports is included in [`powerbi/data/`](powerbi/data/) for direct inspection. Five tables (all except the one-row validation-only `source_summary.csv`) feed the [three-page Power BI report](https://app.powerbi.com/groups/me/reports/1b968d56-f28b-4835-8f77-d6d0dac681f2), created and checked in October 2026. The live report is in a private Power BI workspace and requires workspace access. A [static PDF of all three pages](powerbi/NHS-Emergency-Demand-Capacity-Analytics.pdf) and [page images](powerbi/images/) are public; the [Power BI report notes](powerbi/BUILD_GUIDE.md) describe its visuals and how to rebuild it from the exports. Raw NHS files, the local SQLite database, and the native service report are not stored in Git.
 
 **Accurate resume wording:** “Analyzed NHS England emergency-admission trends, decision-to-admit delay counts, and published bed occupancy; compared next-month admission forecasts with a seasonal baseline and built a Power BI report to communicate the results.”

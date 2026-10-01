@@ -1,0 +1,2 @@
+demand_first_month,demand_last_month,demand_months,total_emergency_admissions_latest_month,dta_wait_over_4h_latest_month,dta_wait_over_12h_latest_month,historical_beds_last_quarter,latest_bed_snapshot_quarter,latest_general_acute_occupancy_pct,trusts_with_general_acute_beds
+2016-02-01,2026-08-01,127,517868,118550,44951,2026-06-30,2026-06-30,90.85323706549846,153
