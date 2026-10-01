@@ -1,28 +1,28 @@
-# Power BI report build guide
+# Power BI report notes and rebuild guide
 
-Run the project pipeline, then import the six CSV files from `outputs/powerbi/`. Set `month` and `quarter_end` to **Date** and all counts and bed measures to numeric types. Display **England aggregate, 2016–2026** and each metric's reporting period prominently.
+The [Power BI service report](https://app.powerbi.com/groups/me/reports/1b968d56-f28b-4835-8f77-d6d0dac681f2) has three pages. It is saved in a private workspace, so the link requires access to that workspace. Rebuild it by running the pipeline and importing `monthly_demand.csv`, `quarterly_beds.csv`, `trust_beds_2026q2.csv`, `admissions_forecast_backtest.csv`, and `admissions_forecast_summary.csv` from `outputs/powerbi/`. The one-row `source_summary.csv` is for validation, not a report table. Set month and quarter-end fields to Date and counts, beds, percentages, and forecast values to numeric types.
 
-Keep the monthly demand, quarterly beds, and trust snapshot tables **disconnected**. They come from different NHS collections and have different time grains and provider populations. Do not create a single shared slicer that implies a direct match between monthly admissions and quarterly beds.
+Keep the monthly demand, quarterly beds, trust snapshot, backtest, and summary tables **disconnected**. They represent different time grains or populations. A cross-table relationship or shared slicer would imply a match the source publications do not establish.
 
-## Page 1 — Emergency demand
+## Emergency demand
 
-- Cards: latest published month, total emergency admissions, A&E attendances.
-- Monthly line chart: total emergency admissions, split into via-A&E and other routes.
-- Monthly line chart: attendances by A&E department type.
-- Year-over-year percentage chart, with pandemic and reporting-change context in a note.
+- Line chart: `monthly_demand.month` against `total_emergency_admissions`, February 2016–August 2026.
+- Line chart: `monthly_demand.month` against `dta_wait_over_12h`. These are **counts of patients waiting over 12 hours after a decision to admit**, not average ED waits.
 
-## Page 2 — Admission pressure and capacity
+## Bed pressure
 
-- Monthly bars: `dta_wait_over_4h` and `dta_wait_over_12h`. Label them **counts after decision to admit**, not average waiting time.
-- Quarterly line chart: general-and-acute `occupancy_pct`; show available and occupied average beds as tooltips.
-- Trust table for April–June 2026: organisation, available beds, occupied beds, occupancy percentage. Filter out zero-bed trusts, as the export already does.
-- State that monthly admissions and quarterly beds are separate NHS populations and cannot be combined into an admissions-per-bed rate here.
+- Line chart: `quarterly_beds.quarter_end` against `occupancy_pct` for general-and-acute overnight beds, June 2015–June 2026.
+- Trust table: `organisation_name`, `available_beds`, `occupied_beds`, and `occupancy_pct` from the April–June 2026 snapshot, sorted by occupancy descending. The sum of trust occupancy percentages is meaningless, so table totals are disabled.
 
-## Page 3 — Next-month admissions forecast
+The admissions series and bed series are shown separately. They come from different NHS collections and populations; the report does not calculate an admissions-per-bed rate.
 
-- Cards: as-of month, forecast month, preferred next-month forecast, seasonal baseline MAE, random-forest MAE.
-- Backtest line chart: actual admissions versus both methods across September 2024–August 2026.
-- Note: the preferred method is the lower-MAE **same-month-last-year baseline** for this evaluation.
-- Label September 2026 as a historical as-of forecast, not today's live prediction.
+## Admission forecast
 
-Before claiming a Power BI dashboard on a resume, save the native report, check these three pages, and reconcile headline figures with `source_summary.csv` and `admissions_forecast_summary.csv`.
+- Line chart: `admissions_forecast_backtest.month` against `actual_admissions`, `seasonal_baseline`, and `model_forecast` across the 24 held-out months, September 2024–August 2026.
+- Cards: the preferred September 2026 forecast, baseline MAE, and random-forest MAE from `admissions_forecast_summary`.
+
+The preferred method is the lower-MAE same-month-last-year baseline: 9,874.21 admissions per month versus 15,501.42 for the random forest. Its September 2026 forecast was **535,580 admissions as of August 2026**. This is a historical as-of forecast, not a live prediction for today's month. Power BI cards abbreviate these numbers in the current report.
+
+The saved report was checked in reading view after the semantic model completed its refresh. Its charts display rows from the imported tables, and its three pages and metric labels were verified against the local exports.
+
+The [three-page PDF export](NHS-Emergency-Demand-Capacity-Analytics.pdf) is a static preview. Its trust table shows only the visible top rows; the live report scrolls through the full trust snapshot.

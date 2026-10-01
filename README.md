@@ -1,6 +1,6 @@
 # NHS England Emergency Demand & Capacity Analytics
 
-An end-to-end SQL, Python, forecasting, and Power BI preparation project using **published NHS England aggregate statistics**. It studies emergency demand, long waits after a decision to admit, and general-and-acute overnight bed occupancy. The pipeline is **NHS workbooks and CSVs → SQLite → Python analysis and backtest → Power BI import tables**.
+An end-to-end SQL, Python, forecasting, and Power BI project using **published NHS England aggregate statistics**. It studies emergency demand, long waits after a decision to admit, and general-and-acute overnight bed occupancy. The pipeline is **NHS workbooks and CSVs → SQLite → Python analysis and backtest → Power BI report**.
 
 This project contains **no patient-level records**. It does not estimate individual length of stay or an individual's ED-to-ward transfer time.
 
@@ -67,6 +67,6 @@ The baseline performed better and is the preferred demonstration forecast: **535
 
 ## Outputs and Power BI
 
-`outputs/powerbi/` contains `monthly_demand.csv`, `quarterly_beds.csv`, `trust_beds_2026q2.csv`, `source_summary.csv`, `admissions_forecast_backtest.csv`, and `admissions_forecast_summary.csv`. The [Power BI build guide](powerbi/BUILD_GUIDE.md) defines three report pages and metric labels. A native Power BI report has not yet been added; the dashboard claim should be made only after the actual report is built and checked against these exports.
+`outputs/powerbi/` contains `monthly_demand.csv`, `quarterly_beds.csv`, `trust_beds_2026q2.csv`, `source_summary.csv`, `admissions_forecast_backtest.csv`, and `admissions_forecast_summary.csv`. Five tables (all except the one-row validation-only `source_summary.csv`) feed the [three-page Power BI report](https://app.powerbi.com/groups/me/reports/1b968d56-f28b-4835-8f77-d6d0dac681f2), created and checked in October 2026. The live report is in a private Power BI workspace and requires workspace access. A [static PDF of all three pages](powerbi/NHS-Emergency-Demand-Capacity-Analytics.pdf) is available publicly; the [Power BI report notes](powerbi/BUILD_GUIDE.md) describe its visuals and how to rebuild it from the exports. The generated CSVs and native service report are not stored in Git.
 
-**Accurate resume wording now:** “Analyzed NHS England emergency-admission trends, decision-to-admit delay counts, and published bed occupancy; compared next-month admission forecasts with a seasonal baseline.”
+**Accurate resume wording:** “Analyzed NHS England emergency-admission trends, decision-to-admit delay counts, and published bed occupancy; compared next-month admission forecasts with a seasonal baseline and built a Power BI report to communicate the results.”
