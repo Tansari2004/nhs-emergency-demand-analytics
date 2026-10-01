@@ -1,5 +1,7 @@
 # NHS England Emergency Demand & Capacity Analytics
 
+[![Verify analytics pipeline](https://github.com/Tansari2004/nhs-emergency-demand-analytics/actions/workflows/verify.yml/badge.svg)](https://github.com/Tansari2004/nhs-emergency-demand-analytics/actions/workflows/verify.yml)
+
 An end-to-end SQL, Python, forecasting, and Power BI project using **published NHS England aggregate statistics**. It studies emergency demand, long waits after a decision to admit, and general-and-acute overnight bed occupancy. The pipeline is **NHS workbooks and CSVs → SQLite → Python analysis and backtest → Power BI report**.
 
 This project contains **no patient-level records**. It does not estimate individual length of stay or an individual's ED-to-ward transfer time.
