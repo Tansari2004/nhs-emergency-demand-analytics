@@ -42,15 +42,15 @@ Use Python 3.9 or newer and `curl`. From the repository directory:
 
 ```bash
 python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m pip install -r requirements-repro.txt
 .venv/bin/python src/ingest.py
 .venv/bin/python src/analyze.py
 .venv/bin/python src/forecast.py
-.venv/bin/python src/validate.py
+.venv/bin/python src/validate.py --snapshot powerbi/data
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
-On Windows, replace `.venv/bin/python` with `.venv\Scripts\python.exe`. The importer downloads the official files into `data/raw/` and verifies their hashes. It creates `data/processed/nhs.sqlite`; dashboard import CSVs appear in `outputs/powerbi/`. These generated files are excluded from Git. If a hash fails, review the updated NHS publication before changing the pinned version.
+On Windows, replace `.venv/bin/python` with `.venv\Scripts\python.exe`. The importer downloads the official files into `data/raw/` and verifies their hashes. It creates `data/processed/nhs.sqlite`; dashboard import CSVs appear in `outputs/powerbi/`. These generated files are excluded from Git. If a hash fails, review the updated NHS publication before changing the pinned version. `requirements-repro.txt` pins the numerical libraries and workbook readers used for the published snapshot; the broader ranges remain in `requirements.txt` for development. CI rebuilds from pinned sources and compares all six published CSVs with regenerated outputs. A changed snapshot or numerical environment should be reviewed rather than automatically overwriting the published results.
 
 ## Measures and limits
 
@@ -76,14 +76,18 @@ The August 2026 monthly figures and the April–June 2026 bed figures are separa
 
 ## Forecast evaluation
 
-The target is **next-month England emergency admissions**. The model uses month-of-year, month length, and admissions from previous months only. A random forest is tested against a simple seasonal baseline: use the admissions count from the same month one year earlier. The first fit ends August 2024; the chronological test is September 2024–August 2026 (24 months). Each test row uses actual prior-month admissions, simulating a one-month-ahead update. After evaluation, both methods use all observations through August 2026 to forecast September 2026.
+The target is **next-month England emergency admissions**. The model uses month-of-year, month length, and admissions from previous months only. A random forest is tested against a simple seasonal baseline: use the admissions count from the same month one year earlier. The first fit ends August 2024; the chronological test is September 2024–August 2026 (24 months). Each test row uses actual prior-month admissions in a retrospective one-step evaluation. The model fitted through August 2024 stays fixed across the test months; only observed lag inputs update. This verifies reporting-month ordering, not what data had been published at a historical forecast issue date. The workbook is a single later publication, so the evaluation does not reproduce historical release lags or source revisions. After evaluation, both methods use all observations through August 2026 to forecast September 2026.
 
 | Method | Test MAE, admissions/month |
 | --- | ---: |
 | Same month last year | 9,874.21 |
 | Random forest | 15,501.42 |
 
-The baseline performed better and is the preferred demonstration forecast: **535,580 emergency admissions for September 2026** as of August 2026. This is a historical as-of forecast; it is not a live prediction for the current month. MAE measures absolute forecast error; neither method is claimed to improve hospital outcomes.
+The baseline performed better and is the preferred demonstration forecast: **535,580 emergency admissions for September 2026** using observations through August 2026. Here `as_of_month` denotes the last reporting month, not a forecast issue date or a publication cutoff. This is a retrospective demonstration forecast; it is not a live prediction for the current month. MAE measures absolute forecast error; neither method is claimed to improve hospital outcomes.
+
+## Audit and verification
+
+The [October 24 audit](docs/audit-2026-10-24.md) reproduced the complete pipeline, all six report CSVs and the reported forecast errors. The validator now compares historical exports to SQLite values, anchors backtest dates/actuals/baselines to source months, checks all headline fields and rejects missing forecast values. Regression tests demonstrate that altered exports fail. These checks establish reproducibility and internal consistency, not operational forecasting performance or hospital outcomes.
 
 ## Outputs and Power BI
 

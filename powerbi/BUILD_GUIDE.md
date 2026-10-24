@@ -21,8 +21,12 @@ The admissions series and bed series are shown separately. They come from differ
 - Line chart: `admissions_forecast_backtest.month` against `actual_admissions`, `seasonal_baseline`, and `model_forecast` across the 24 held-out months, September 2024–August 2026.
 - Cards: the preferred September 2026 forecast, baseline MAE, and random-forest MAE from `admissions_forecast_summary`.
 
-The preferred method is the lower-MAE same-month-last-year baseline: 9,874.21 admissions per month versus 15,501.42 for the random forest. Its September 2026 forecast was **535,580 admissions as of August 2026**. This is a historical as-of forecast, not a live prediction for today's month. Power BI cards abbreviate these numbers in the current report.
+The preferred method is the lower-MAE same-month-last-year baseline: 9,874.21 admissions per month versus 15,501.42 for the random forest. Its September 2026 forecast was **535,580 admissions using observations through August 2026**. This is a retrospective demonstration forecast. The `as_of_month` field is a reporting month, not an issue date; the backtest does not model historical publication lags or data revisions. It is not a live prediction for today's month. Power BI cards abbreviate these numbers in the current report.
 
 The saved report was checked in reading view after the semantic model completed its refresh. Its charts display rows from the imported tables, and its three pages and metric labels were verified against the local exports.
 
 The [three-page PDF export](NHS-Emergency-Demand-Capacity-Analytics.pdf) is a static preview. Its trust table shows only the visible top rows; the live report scrolls through the full trust snapshot.
+
+## Verify the published CSV snapshot
+
+Install `requirements-repro.txt`, rebuild the pipeline, then run `python src/validate.py --snapshot powerbi/data` from the repository root. This compares every published CSV against the rebuilt exports. It does not refresh or validate Power BI Desktop itself; after an intentional data change, refresh and review the report separately.
