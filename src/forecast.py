@@ -29,7 +29,11 @@ def make_features(series: pd.Series) -> pd.DataFrame:
 
 
 def run_forecast(series: pd.Series) -> tuple[pd.DataFrame, dict]:
-    if series.isna().any() or not series.index.equals(pd.date_range(series.index.min(), series.index.max(), freq="MS")):
+    if (series.empty or not isinstance(series.index, pd.DatetimeIndex)
+            or series.isna().any() or not np.isfinite(series.to_numpy(dtype=float)).all()
+            or (series < 0).any() or (series != series.round()).any()):
+        raise ValueError("Admissions must be finite, nonnegative whole counts on a monthly date index")
+    if not series.index.equals(pd.date_range(series.index.min(), series.index.max(), freq="MS")):
         raise ValueError("Admissions must have one observation for every consecutive month")
     next_month = series.index.max() + pd.offsets.MonthBegin(1)
     extended = pd.concat([series, pd.Series([np.nan], index=[next_month])])

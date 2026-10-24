@@ -14,7 +14,7 @@ jobs:
           python-version: '3.11'
           cache: pip
       - name: Install dependencies
-        run: python -m pip install -r requirements.txt
+        run: python -m pip install -r requirements-repro.txt
       - name: Download pinned NHS sources and build database
         run: python src/ingest.py
       - name: Export analytics and forecasts
@@ -23,5 +23,5 @@ jobs:
           python src/forecast.py
       - name: Validate outputs and forecast behavior
         run: |
-          python src/validate.py
+          python src/validate.py --snapshot powerbi/data
           python -m unittest discover -s tests -v
