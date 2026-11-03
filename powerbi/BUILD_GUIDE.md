@@ -1,5 +1,24 @@
 # Power BI report notes and rebuild guide
 
+## Updated editable source preview
+
+The [new PBIP source](upgrade/README.md) and [complete download](NHS_Analytics_Source_Preview.zip)
+add explicit measures, independent date/trust selectors, correct occupancy
+aggregation and the expanding-window forecast comparison. Offline data/model,
+query-parse and PBIR schema checks pass. Native Power BI refresh, DAX execution,
+rendering and filter interactions remain pending. The original `.pbix`, PDF and
+images described below retain the fixed-fit model results and are not exports
+of this preview. The current `data/` forecast CSVs contain the expanding-window
+results plus fixed-fit comparison columns; original versions are archived in
+[`legacy_fixed_fit/`](legacy_fixed_fit/).
+
+The preview's four dimension-to-fact relationships filter each domain
+independently. They do not connect national demand, quarterly beds and the trust
+snapshot to one another. See the preview README for definitions and the required
+native verification checklist.
+
+## Original saved report
+
 The [Power BI service report](https://app.powerbi.com/groups/me/reports/1b968d56-f28b-4835-8f77-d6d0dac681f2) has three pages. It is saved in a private workspace, so the link requires access to that workspace. Download the [editable `.pbix`](NHS-Emergency-Demand-Capacity-Analytics.pbix) to inspect the report and its imported data in Power BI Desktop; the [page images](images/) and [PDF](NHS-Emergency-Demand-Capacity-Analytics.pdf) are public previews. To rebuild the report, import `monthly_demand.csv`, `quarterly_beds.csv`, `trust_beds_2026q2.csv`, `admissions_forecast_backtest.csv`, and `admissions_forecast_summary.csv` from the checked-in [`data/`](data/) snapshot or run the pipeline for fresh exports in `outputs/powerbi/`. The one-row `source_summary.csv` is for validation, not a report table. Set month and quarter-end fields to Date and counts, beds, percentages, and forecast values to numeric types. To refresh the downloaded `.pbix` from new local CSVs, first update its data-source paths to your own exports.
 
 Keep the monthly demand, quarterly beds, trust snapshot, backtest, and summary tables **disconnected**. They represent different time grains or populations. A cross-table relationship or shared slicer would imply a match the source publications do not establish.

@@ -62,6 +62,15 @@ def validate(database: Path, output: Path) -> dict:
         raise AssertionError("Baseline MAE does not match backtest")
     if not np.isclose(abs(backtest.actual_admissions - backtest.model_forecast).mean(), forecast.model_mae, atol=0.1):
         raise AssertionError("Model MAE does not match backtest")
+    if forecast.evaluation_protocol != "expanding_window_one_month_ahead" or int(forecast.expanding_refits) != len(backtest):
+        raise AssertionError("Missing expanding-window evaluation")
+    origins = pd.to_datetime(backtest.training_end)
+    if not (origins == backtest.month - pd.offsets.MonthBegin(1)).all():
+        raise AssertionError("Each forecast must train through the preceding month")
+    if not (backtest.training_rows.diff().dropna() == 1).all():
+        raise AssertionError("Expanding training set should grow by one monthly observation")
+    if not np.isclose(abs(backtest.actual_admissions - backtest.fixed_fit_model_forecast).mean(), forecast.fixed_fit_model_mae, atol=0.1):
+        raise AssertionError("Fixed-fit comparison MAE does not match backtest")
     if int(summary.total_emergency_admissions_latest_month) != int(monthly.total_emergency_admissions.iloc[-1]):
         raise AssertionError("Headline admission count does not match")
     return {"demand_months": len(monthly), "capacity_quarters": len(beds), "trusts": len(trusts), "backtest_months": len(backtest)}

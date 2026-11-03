@@ -1,0 +1,904 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "check": "DemandMonth: embedded import only",
+      "passed": true
+    },
+    {
+      "check": "DemandMonth: row widths",
+      "passed": true
+    },
+    {
+      "check": "DemandMonth: no implicit summation",
+      "passed": true
+    },
+    {
+      "check": "MonthlyDemand: embedded import only",
+      "passed": true
+    },
+    {
+      "check": "MonthlyDemand: row widths",
+      "passed": true
+    },
+    {
+      "check": "MonthlyDemand: no implicit summation",
+      "passed": true
+    },
+    {
+      "check": "BedQuarter: embedded import only",
+      "passed": true
+    },
+    {
+      "check": "BedQuarter: row widths",
+      "passed": true
+    },
+    {
+      "check": "BedQuarter: no implicit summation",
+      "passed": true
+    },
+    {
+      "check": "QuarterlyBeds: embedded import only",
+      "passed": true
+    },
+    {
+      "check": "QuarterlyBeds: row widths",
+      "passed": true
+    },
+    {
+      "check": "QuarterlyBeds: no implicit summation",
+      "passed": true
+    },
+    {
+      "check": "DimTrust: embedded import only",
+      "passed": true
+    },
+    {
+      "check": "DimTrust: row widths",
+      "passed": true
+    },
+    {
+      "check": "DimTrust: no implicit summation",
+      "passed": true
+    },
+    {
+      "check": "TrustSnapshot: embedded import only",
+      "passed": true
+    },
+    {
+      "check": "TrustSnapshot: row widths",
+      "passed": true
+    },
+    {
+      "check": "TrustSnapshot: no implicit summation",
+      "passed": true
+    },
+    {
+      "check": "ForecastMonth: embedded import only",
+      "passed": true
+    },
+    {
+      "check": "ForecastMonth: row widths",
+      "passed": true
+    },
+    {
+      "check": "ForecastMonth: no implicit summation",
+      "passed": true
+    },
+    {
+      "check": "Forecast: embedded import only",
+      "passed": true
+    },
+    {
+      "check": "Forecast: row widths",
+      "passed": true
+    },
+    {
+      "check": "Forecast: no implicit summation",
+      "passed": true
+    },
+    {
+      "check": "Summary: embedded import only",
+      "passed": true
+    },
+    {
+      "check": "Summary: row widths",
+      "passed": true
+    },
+    {
+      "check": "Summary: no implicit summation",
+      "passed": true
+    },
+    {
+      "check": "no external model data sources",
+      "passed": true
+    },
+    {
+      "check": "monthly_demand.csv: checked snapshot matches pipeline rebuild",
+      "passed": true
+    },
+    {
+      "check": "trust_beds_2026q2.csv: checked snapshot matches pipeline rebuild",
+      "passed": true
+    },
+    {
+      "check": "admissions_forecast_summary.csv: checked snapshot matches pipeline rebuild",
+      "passed": true
+    },
+    {
+      "check": "admissions_forecast_backtest.csv: checked snapshot matches pipeline rebuild",
+      "passed": true
+    },
+    {
+      "check": "source_summary.csv: checked snapshot matches pipeline rebuild",
+      "passed": true
+    },
+    {
+      "check": "quarterly_beds.csv: checked snapshot matches pipeline rebuild",
+      "passed": true
+    },
+    {
+      "check": "127 demand observations retained exactly",
+      "passed": true
+    },
+    {
+      "check": "45 bed quarters retained",
+      "passed": true
+    },
+    {
+      "check": "153 trust snapshots retained",
+      "passed": true
+    },
+    {
+      "check": "24 targets and origins retained exactly",
+      "passed": true
+    },
+    {
+      "check": "four separate filtering domains",
+      "passed": true
+    },
+    {
+      "check": "MonthlyDemand: valid one-way dimension relationship",
+      "passed": true
+    },
+    {
+      "check": "QuarterlyBeds: valid one-way dimension relationship",
+      "passed": true
+    },
+    {
+      "check": "TrustSnapshot: valid one-way dimension relationship",
+      "passed": true
+    },
+    {
+      "check": "Forecast: valid one-way dimension relationship",
+      "passed": true
+    },
+    {
+      "check": "fixed admissions finding",
+      "passed": true
+    },
+    {
+      "check": "fixed delay-count finding",
+      "passed": true
+    },
+    {
+      "check": "calendar day weights",
+      "passed": true
+    },
+    {
+      "check": "single-quarter occupancy matches public finding",
+      "passed": true
+    },
+    {
+      "check": "latest trust totals reconcile to national quarter",
+      "passed": true
+    },
+    {
+      "check": "weighted occupancy differs from arithmetic mean",
+      "passed": true
+    },
+    {
+      "check": "multi-quarter percentage remains a ratio",
+      "passed": true
+    },
+    {
+      "check": "seasonal_baseline: full-period MAE",
+      "passed": true
+    },
+    {
+      "check": "model_forecast: full-period MAE",
+      "passed": true
+    },
+    {
+      "check": "fixed_fit_model_forecast: full-period MAE",
+      "passed": true
+    },
+    {
+      "check": "training cutoff precedes every target",
+      "passed": true
+    },
+    {
+      "check": "expanding rather than fixed training pool",
+      "passed": true
+    },
+    {
+      "check": "visual within page 5469bc675a4a55ccf956",
+      "passed": true
+    },
+    {
+      "check": "visual within page dc42f4361905541a38c0",
+      "passed": true
+    },
+    {
+      "check": "visual within page debd268173ad0f03fcd3",
+      "passed": true
+    },
+    {
+      "check": "visual within page 2508e4db3dd118821d34",
+      "passed": true
+    },
+    {
+      "check": "visual within page fce44db6cdca338b07da",
+      "passed": true
+    },
+    {
+      "check": "visual within page 6e60135319c366f44dba",
+      "passed": true
+    },
+    {
+      "check": "visual within page 611afbd6b376f987deb1",
+      "passed": true
+    },
+    {
+      "check": "visual within page ca208e77fc77c9d32e5d",
+      "passed": true
+    },
+    {
+      "check": "no overlap 5469bc675a4a55ccf956/dc42f4361905541a38c0",
+      "passed": true
+    },
+    {
+      "check": "no overlap 5469bc675a4a55ccf956/debd268173ad0f03fcd3",
+      "passed": true
+    },
+    {
+      "check": "no overlap 5469bc675a4a55ccf956/2508e4db3dd118821d34",
+      "passed": true
+    },
+    {
+      "check": "no overlap 5469bc675a4a55ccf956/fce44db6cdca338b07da",
+      "passed": true
+    },
+    {
+      "check": "no overlap 5469bc675a4a55ccf956/6e60135319c366f44dba",
+      "passed": true
+    },
+    {
+      "check": "no overlap 5469bc675a4a55ccf956/611afbd6b376f987deb1",
+      "passed": true
+    },
+    {
+      "check": "no overlap 5469bc675a4a55ccf956/ca208e77fc77c9d32e5d",
+      "passed": true
+    },
+    {
+      "check": "no overlap dc42f4361905541a38c0/debd268173ad0f03fcd3",
+      "passed": true
+    },
+    {
+      "check": "no overlap dc42f4361905541a38c0/2508e4db3dd118821d34",
+      "passed": true
+    },
+    {
+      "check": "no overlap dc42f4361905541a38c0/fce44db6cdca338b07da",
+      "passed": true
+    },
+    {
+      "check": "no overlap dc42f4361905541a38c0/6e60135319c366f44dba",
+      "passed": true
+    },
+    {
+      "check": "no overlap dc42f4361905541a38c0/611afbd6b376f987deb1",
+      "passed": true
+    },
+    {
+      "check": "no overlap dc42f4361905541a38c0/ca208e77fc77c9d32e5d",
+      "passed": true
+    },
+    {
+      "check": "no overlap debd268173ad0f03fcd3/2508e4db3dd118821d34",
+      "passed": true
+    },
+    {
+      "check": "no overlap debd268173ad0f03fcd3/fce44db6cdca338b07da",
+      "passed": true
+    },
+    {
+      "check": "no overlap debd268173ad0f03fcd3/6e60135319c366f44dba",
+      "passed": true
+    },
+    {
+      "check": "no overlap debd268173ad0f03fcd3/611afbd6b376f987deb1",
+      "passed": true
+    },
+    {
+      "check": "no overlap debd268173ad0f03fcd3/ca208e77fc77c9d32e5d",
+      "passed": true
+    },
+    {
+      "check": "no overlap 2508e4db3dd118821d34/fce44db6cdca338b07da",
+      "passed": true
+    },
+    {
+      "check": "no overlap 2508e4db3dd118821d34/6e60135319c366f44dba",
+      "passed": true
+    },
+    {
+      "check": "no overlap 2508e4db3dd118821d34/611afbd6b376f987deb1",
+      "passed": true
+    },
+    {
+      "check": "no overlap 2508e4db3dd118821d34/ca208e77fc77c9d32e5d",
+      "passed": true
+    },
+    {
+      "check": "no overlap fce44db6cdca338b07da/6e60135319c366f44dba",
+      "passed": true
+    },
+    {
+      "check": "no overlap fce44db6cdca338b07da/611afbd6b376f987deb1",
+      "passed": true
+    },
+    {
+      "check": "no overlap fce44db6cdca338b07da/ca208e77fc77c9d32e5d",
+      "passed": true
+    },
+    {
+      "check": "no overlap 6e60135319c366f44dba/611afbd6b376f987deb1",
+      "passed": true
+    },
+    {
+      "check": "no overlap 6e60135319c366f44dba/ca208e77fc77c9d32e5d",
+      "passed": true
+    },
+    {
+      "check": "no overlap 611afbd6b376f987deb1/ca208e77fc77c9d32e5d",
+      "passed": true
+    },
+    {
+      "check": "visual within page d865ac8c325c4b061e42",
+      "passed": true
+    },
+    {
+      "check": "visual within page 6dbcff76846a35901cbf",
+      "passed": true
+    },
+    {
+      "check": "visual within page 92950a2f0a3a9992df82",
+      "passed": true
+    },
+    {
+      "check": "visual within page 2f7f23664ac5bbbfaeab",
+      "passed": true
+    },
+    {
+      "check": "visual within page b9cda4e41d060842ba2e",
+      "passed": true
+    },
+    {
+      "check": "visual within page bc21092a7057f4b4d5e6",
+      "passed": true
+    },
+    {
+      "check": "visual within page 7c9ee13f44dbdb33fa7e",
+      "passed": true
+    },
+    {
+      "check": "visual within page a36af71b496abf4e7676",
+      "passed": true
+    },
+    {
+      "check": "visual within page cc2ffe51a591bbff21ec",
+      "passed": true
+    },
+    {
+      "check": "no overlap d865ac8c325c4b061e42/6dbcff76846a35901cbf",
+      "passed": true
+    },
+    {
+      "check": "no overlap d865ac8c325c4b061e42/92950a2f0a3a9992df82",
+      "passed": true
+    },
+    {
+      "check": "no overlap d865ac8c325c4b061e42/2f7f23664ac5bbbfaeab",
+      "passed": true
+    },
+    {
+      "check": "no overlap d865ac8c325c4b061e42/b9cda4e41d060842ba2e",
+      "passed": true
+    },
+    {
+      "check": "no overlap d865ac8c325c4b061e42/bc21092a7057f4b4d5e6",
+      "passed": true
+    },
+    {
+      "check": "no overlap d865ac8c325c4b061e42/7c9ee13f44dbdb33fa7e",
+      "passed": true
+    },
+    {
+      "check": "no overlap d865ac8c325c4b061e42/a36af71b496abf4e7676",
+      "passed": true
+    },
+    {
+      "check": "no overlap d865ac8c325c4b061e42/cc2ffe51a591bbff21ec",
+      "passed": true
+    },
+    {
+      "check": "no overlap 6dbcff76846a35901cbf/92950a2f0a3a9992df82",
+      "passed": true
+    },
+    {
+      "check": "no overlap 6dbcff76846a35901cbf/2f7f23664ac5bbbfaeab",
+      "passed": true
+    },
+    {
+      "check": "no overlap 6dbcff76846a35901cbf/b9cda4e41d060842ba2e",
+      "passed": true
+    },
+    {
+      "check": "no overlap 6dbcff76846a35901cbf/bc21092a7057f4b4d5e6",
+      "passed": true
+    },
+    {
+      "check": "no overlap 6dbcff76846a35901cbf/7c9ee13f44dbdb33fa7e",
+      "passed": true
+    },
+    {
+      "check": "no overlap 6dbcff76846a35901cbf/a36af71b496abf4e7676",
+      "passed": true
+    },
+    {
+      "check": "no overlap 6dbcff76846a35901cbf/cc2ffe51a591bbff21ec",
+      "passed": true
+    },
+    {
+      "check": "no overlap 92950a2f0a3a9992df82/2f7f23664ac5bbbfaeab",
+      "passed": true
+    },
+    {
+      "check": "no overlap 92950a2f0a3a9992df82/b9cda4e41d060842ba2e",
+      "passed": true
+    },
+    {
+      "check": "no overlap 92950a2f0a3a9992df82/bc21092a7057f4b4d5e6",
+      "passed": true
+    },
+    {
+      "check": "no overlap 92950a2f0a3a9992df82/7c9ee13f44dbdb33fa7e",
+      "passed": true
+    },
+    {
+      "check": "no overlap 92950a2f0a3a9992df82/a36af71b496abf4e7676",
+      "passed": true
+    },
+    {
+      "check": "no overlap 92950a2f0a3a9992df82/cc2ffe51a591bbff21ec",
+      "passed": true
+    },
+    {
+      "check": "no overlap 2f7f23664ac5bbbfaeab/b9cda4e41d060842ba2e",
+      "passed": true
+    },
+    {
+      "check": "no overlap 2f7f23664ac5bbbfaeab/bc21092a7057f4b4d5e6",
+      "passed": true
+    },
+    {
+      "check": "no overlap 2f7f23664ac5bbbfaeab/7c9ee13f44dbdb33fa7e",
+      "passed": true
+    },
+    {
+      "check": "no overlap 2f7f23664ac5bbbfaeab/a36af71b496abf4e7676",
+      "passed": true
+    },
+    {
+      "check": "no overlap 2f7f23664ac5bbbfaeab/cc2ffe51a591bbff21ec",
+      "passed": true
+    },
+    {
+      "check": "no overlap b9cda4e41d060842ba2e/bc21092a7057f4b4d5e6",
+      "passed": true
+    },
+    {
+      "check": "no overlap b9cda4e41d060842ba2e/7c9ee13f44dbdb33fa7e",
+      "passed": true
+    },
+    {
+      "check": "no overlap b9cda4e41d060842ba2e/a36af71b496abf4e7676",
+      "passed": true
+    },
+    {
+      "check": "no overlap b9cda4e41d060842ba2e/cc2ffe51a591bbff21ec",
+      "passed": true
+    },
+    {
+      "check": "no overlap bc21092a7057f4b4d5e6/7c9ee13f44dbdb33fa7e",
+      "passed": true
+    },
+    {
+      "check": "no overlap bc21092a7057f4b4d5e6/a36af71b496abf4e7676",
+      "passed": true
+    },
+    {
+      "check": "no overlap bc21092a7057f4b4d5e6/cc2ffe51a591bbff21ec",
+      "passed": true
+    },
+    {
+      "check": "no overlap 7c9ee13f44dbdb33fa7e/a36af71b496abf4e7676",
+      "passed": true
+    },
+    {
+      "check": "no overlap 7c9ee13f44dbdb33fa7e/cc2ffe51a591bbff21ec",
+      "passed": true
+    },
+    {
+      "check": "no overlap a36af71b496abf4e7676/cc2ffe51a591bbff21ec",
+      "passed": true
+    },
+    {
+      "check": "visual within page d71ac84621a5f19f219c",
+      "passed": true
+    },
+    {
+      "check": "visual within page 379733cc96b4a1ec66c3",
+      "passed": true
+    },
+    {
+      "check": "visual within page ec84aad48cb9b779c0bb",
+      "passed": true
+    },
+    {
+      "check": "visual within page 54c406da55b2cff1e2df",
+      "passed": true
+    },
+    {
+      "check": "visual within page 687e8f3940615f7e90d3",
+      "passed": true
+    },
+    {
+      "check": "visual within page e66db24edd1c3a58bea1",
+      "passed": true
+    },
+    {
+      "check": "visual within page baf43e127aad3fbb9db3",
+      "passed": true
+    },
+    {
+      "check": "visual within page 32dc2c266498d82b49c5",
+      "passed": true
+    },
+    {
+      "check": "visual within page bf5862912e299a5b06eb",
+      "passed": true
+    },
+    {
+      "check": "no overlap d71ac84621a5f19f219c/379733cc96b4a1ec66c3",
+      "passed": true
+    },
+    {
+      "check": "no overlap d71ac84621a5f19f219c/ec84aad48cb9b779c0bb",
+      "passed": true
+    },
+    {
+      "check": "no overlap d71ac84621a5f19f219c/54c406da55b2cff1e2df",
+      "passed": true
+    },
+    {
+      "check": "no overlap d71ac84621a5f19f219c/687e8f3940615f7e90d3",
+      "passed": true
+    },
+    {
+      "check": "no overlap d71ac84621a5f19f219c/e66db24edd1c3a58bea1",
+      "passed": true
+    },
+    {
+      "check": "no overlap d71ac84621a5f19f219c/baf43e127aad3fbb9db3",
+      "passed": true
+    },
+    {
+      "check": "no overlap d71ac84621a5f19f219c/32dc2c266498d82b49c5",
+      "passed": true
+    },
+    {
+      "check": "no overlap d71ac84621a5f19f219c/bf5862912e299a5b06eb",
+      "passed": true
+    },
+    {
+      "check": "no overlap 379733cc96b4a1ec66c3/ec84aad48cb9b779c0bb",
+      "passed": true
+    },
+    {
+      "check": "no overlap 379733cc96b4a1ec66c3/54c406da55b2cff1e2df",
+      "passed": true
+    },
+    {
+      "check": "no overlap 379733cc96b4a1ec66c3/687e8f3940615f7e90d3",
+      "passed": true
+    },
+    {
+      "check": "no overlap 379733cc96b4a1ec66c3/e66db24edd1c3a58bea1",
+      "passed": true
+    },
+    {
+      "check": "no overlap 379733cc96b4a1ec66c3/baf43e127aad3fbb9db3",
+      "passed": true
+    },
+    {
+      "check": "no overlap 379733cc96b4a1ec66c3/32dc2c266498d82b49c5",
+      "passed": true
+    },
+    {
+      "check": "no overlap 379733cc96b4a1ec66c3/bf5862912e299a5b06eb",
+      "passed": true
+    },
+    {
+      "check": "no overlap ec84aad48cb9b779c0bb/54c406da55b2cff1e2df",
+      "passed": true
+    },
+    {
+      "check": "no overlap ec84aad48cb9b779c0bb/687e8f3940615f7e90d3",
+      "passed": true
+    },
+    {
+      "check": "no overlap ec84aad48cb9b779c0bb/e66db24edd1c3a58bea1",
+      "passed": true
+    },
+    {
+      "check": "no overlap ec84aad48cb9b779c0bb/baf43e127aad3fbb9db3",
+      "passed": true
+    },
+    {
+      "check": "no overlap ec84aad48cb9b779c0bb/32dc2c266498d82b49c5",
+      "passed": true
+    },
+    {
+      "check": "no overlap ec84aad48cb9b779c0bb/bf5862912e299a5b06eb",
+      "passed": true
+    },
+    {
+      "check": "no overlap 54c406da55b2cff1e2df/687e8f3940615f7e90d3",
+      "passed": true
+    },
+    {
+      "check": "no overlap 54c406da55b2cff1e2df/e66db24edd1c3a58bea1",
+      "passed": true
+    },
+    {
+      "check": "no overlap 54c406da55b2cff1e2df/baf43e127aad3fbb9db3",
+      "passed": true
+    },
+    {
+      "check": "no overlap 54c406da55b2cff1e2df/32dc2c266498d82b49c5",
+      "passed": true
+    },
+    {
+      "check": "no overlap 54c406da55b2cff1e2df/bf5862912e299a5b06eb",
+      "passed": true
+    },
+    {
+      "check": "no overlap 687e8f3940615f7e90d3/e66db24edd1c3a58bea1",
+      "passed": true
+    },
+    {
+      "check": "no overlap 687e8f3940615f7e90d3/baf43e127aad3fbb9db3",
+      "passed": true
+    },
+    {
+      "check": "no overlap 687e8f3940615f7e90d3/32dc2c266498d82b49c5",
+      "passed": true
+    },
+    {
+      "check": "no overlap 687e8f3940615f7e90d3/bf5862912e299a5b06eb",
+      "passed": true
+    },
+    {
+      "check": "no overlap e66db24edd1c3a58bea1/baf43e127aad3fbb9db3",
+      "passed": true
+    },
+    {
+      "check": "no overlap e66db24edd1c3a58bea1/32dc2c266498d82b49c5",
+      "passed": true
+    },
+    {
+      "check": "no overlap e66db24edd1c3a58bea1/bf5862912e299a5b06eb",
+      "passed": true
+    },
+    {
+      "check": "no overlap baf43e127aad3fbb9db3/32dc2c266498d82b49c5",
+      "passed": true
+    },
+    {
+      "check": "no overlap baf43e127aad3fbb9db3/bf5862912e299a5b06eb",
+      "passed": true
+    },
+    {
+      "check": "no overlap 32dc2c266498d82b49c5/bf5862912e299a5b06eb",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Selected Quarter Occupancy",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Bed Day Weighted Occupancy",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Trust Snapshot Occupancy",
+      "passed": true
+    },
+    {
+      "check": "visual resolves BedQuarter.Quarter end",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Selected Quarter Occupancy",
+      "passed": true
+    },
+    {
+      "check": "visual resolves BedQuarter.Quarter end",
+      "passed": true
+    },
+    {
+      "check": "visual resolves DimTrust.Trust",
+      "passed": true
+    },
+    {
+      "check": "visual resolves BedQuarter.Quarter end",
+      "passed": true
+    },
+    {
+      "check": "visual resolves DimTrust.Trust",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Trust Available Beds",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Trust Occupied Beds",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Trust Snapshot Occupancy",
+      "passed": true
+    },
+    {
+      "check": "visual resolves ForecastMonth.Month",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Seasonal Absolute Error",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Forest Absolute Error",
+      "passed": true
+    },
+    {
+      "check": "visual resolves ForecastMonth.Month",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Forecast.Month",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Forecast.Training through",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Forecast.Training rows",
+      "passed": true
+    },
+    {
+      "check": "visual resolves ForecastMonth.Month",
+      "passed": true
+    },
+    {
+      "check": "visual resolves ForecastMonth.Month",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Observed Admissions",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Seasonal Forecast",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Expanding Forest Forecast",
+      "passed": true
+    },
+    {
+      "check": "visual resolves ForecastMonth.Month",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Seasonal MAE",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Expanding Forest MAE",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Fixed Fit Forest MAE",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Evaluation Months",
+      "passed": true
+    },
+    {
+      "check": "visual resolves DemandMonth.Month",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Admissions",
+      "passed": true
+    },
+    {
+      "check": "visual resolves DemandMonth.Month",
+      "passed": true
+    },
+    {
+      "check": "visual resolves DemandMonth.Month",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Admissions",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Admissions YoY Percent",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Over 12 Hour Delays",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Delays YoY Percent",
+      "passed": true
+    },
+    {
+      "check": "visual resolves DemandMonth.Month",
+      "passed": true
+    },
+    {
+      "check": "visual resolves Summary.Over 12 Hour Delays",
+      "passed": true
+    },
+    {
+      "check": "visual resolves DemandMonth.Month",
+      "passed": true
+    },
+    {
+      "check": "relative local model connection",
+      "passed": true
+    }
+  ],
+  "check_count": 222,
+  "native_runtime_verified": false,
+  "reference_values": {
+    "august_2026_admissions_yoy_percent": -1.6206337777997293,
+    "august_2026_delay_yoy_percent": 25.180316912194712,
+    "latest_quarter_occupancy": 0.9085323706549849,
+    "all_quarters_bed_day_weighted_occupancy": 0.8916667489622854,
+    "trust_snapshot_occupancy": 0.9085323706549846,
+    "single_quarter_card_with_multiple_quarters": null
+  },
+  "note": "Reference arithmetic, data fidelity and source checks do not execute native DAX, Power Query refresh or report rendering."
+}

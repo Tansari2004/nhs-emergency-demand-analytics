@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "NHS Analytics"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0fd801f1-f144-577a-810a-8c166e88a020"
+  }
+}

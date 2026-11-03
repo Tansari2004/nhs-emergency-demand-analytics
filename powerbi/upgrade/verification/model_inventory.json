@@ -1,0 +1,61 @@
+{
+  "tables": {
+    "DemandMonth": 1,
+    "MonthlyDemand": 3,
+    "BedQuarter": 1,
+    "QuarterlyBeds": 4,
+    "DimTrust": 3,
+    "TrustSnapshot": 3,
+    "ForecastMonth": 1,
+    "Forecast": 7,
+    "Summary": 4
+  },
+  "relationships": [
+    {
+      "name": "b0fc73be-9fdd-5f79-9b05-b44d54b03a18",
+      "fromTable": "MonthlyDemand",
+      "fromColumn": "Month",
+      "fromCardinality": "many",
+      "toTable": "DemandMonth",
+      "toColumn": "Month",
+      "toCardinality": "one",
+      "crossFilteringBehavior": "oneDirection",
+      "isActive": true
+    },
+    {
+      "name": "05735d24-96a9-53d5-a82b-542ca72c21fb",
+      "fromTable": "QuarterlyBeds",
+      "fromColumn": "Quarter end",
+      "fromCardinality": "many",
+      "toTable": "BedQuarter",
+      "toColumn": "Quarter end",
+      "toCardinality": "one",
+      "crossFilteringBehavior": "oneDirection",
+      "isActive": true
+    },
+    {
+      "name": "013d1bb0-4a07-5f40-b5b3-2e5aea2d5317",
+      "fromTable": "TrustSnapshot",
+      "fromColumn": "Trust code",
+      "fromCardinality": "many",
+      "toTable": "DimTrust",
+      "toColumn": "Trust code",
+      "toCardinality": "one",
+      "crossFilteringBehavior": "oneDirection",
+      "isActive": true
+    },
+    {
+      "name": "fe80facc-10f7-583e-90d3-e09d073a6c03",
+      "fromTable": "Forecast",
+      "fromColumn": "Month",
+      "fromCardinality": "many",
+      "toTable": "ForecastMonth",
+      "toColumn": "Month",
+      "toCardinality": "one",
+      "crossFilteringBehavior": "oneDirection",
+      "isActive": true
+    }
+  ],
+  "measures": 23,
+  "native_runtime_verified": false
+}
