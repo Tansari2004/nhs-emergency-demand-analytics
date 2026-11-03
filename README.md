@@ -6,9 +6,16 @@ An end-to-end SQL, Python, forecasting, and Power BI project using **published N
 
 This project contains **no patient-level records**. It does not estimate individual length of stay or an individual's ED-to-ward transfer time.
 
-**Explore the project:** [Editable Power BI report (.pbix)](powerbi/NHS-Emergency-Demand-Capacity-Analytics.pbix) · [Three-page PDF](powerbi/NHS-Emergency-Demand-Capacity-Analytics.pdf) · [Report data CSVs](powerbi/data/) · [Rebuild guide](powerbi/BUILD_GUIDE.md) · [Python pipeline](src/) · [SQL queries](sql/analytics.sql)
+**Explore the project:** [Updated editable PBIP source preview](powerbi/NHS_Analytics_Source_Preview.zip) · [Measures, filters and verification](powerbi/upgrade/README.md) · [Current data and backtest CSVs](powerbi/data/) · [Python pipeline](src/) · [SQL queries](sql/analytics.sql)
 
-## Power BI report preview
+The updated source adds explicit measures, independent date/trust filters and
+expanding-window forecast evaluation. Source/data checks pass; native Power BI
+refresh, DAX execution and rendered interactions remain unverified. The
+[original PBIX](powerbi/NHS-Emergency-Demand-Capacity-Analytics.pbix),
+[PDF](powerbi/NHS-Emergency-Demand-Capacity-Analytics.pdf) and images below retain
+the original fixed-fit experiment; they have not been relabelled as the upgrade.
+
+## Original Power BI report preview (fixed-fit evaluation)
 
 These images show the three pages of the completed report. The [live Power BI report](https://app.powerbi.com/groups/me/reports/1b968d56-f28b-4835-8f77-d6d0dac681f2) requires access to its private workspace; the editable `.pbix`, PDF, images, and data are public here.
 
@@ -42,7 +49,7 @@ Use Python 3.9 or newer and `curl`. From the repository directory:
 
 ```bash
 python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m pip install -r requirements-repro.txt
 .venv/bin/python src/ingest.py
 .venv/bin/python src/analyze.py
 .venv/bin/python src/forecast.py
@@ -76,17 +83,37 @@ The August 2026 monthly figures and the April–June 2026 bed figures are separa
 
 ## Forecast evaluation
 
-The target is **next-month England emergency admissions**. The model uses month-of-year, month length, and admissions from previous months only. A random forest is tested against a simple seasonal baseline: use the admissions count from the same month one year earlier. The first fit ends August 2024; the chronological test is September 2024–August 2026 (24 months). Each test row uses actual prior-month admissions, simulating a one-month-ahead update. After evaluation, both methods use all observations through August 2026 to forecast September 2026.
+The target is **next-month England emergency admissions**. The model uses month-of-year, month length, year and admissions from previous months only. A random forest is tested against a seasonal baseline: use the same month one year earlier. The expanding-window evaluation retrains before each of 24 targets, September 2024–August 2026, using only preceding monthly observations. Every output row records the training end and row count. The original forest fitted once through August 2024 remains a comparison on the same targets. Parameters are unchanged. After evaluation, a final forest is fitted through August 2026 for the historical September 2026 estimate.
 
 | Method | Test MAE, admissions/month |
 | --- | ---: |
 | Same month last year | 9,874.21 |
-| Random forest | 15,501.42 |
+| Random forest, expanding window · 24 refits | 13,134.67 |
+| Original random forest, fixed August 2024 fit | 15,501.42 |
+
+Refitting improves the forest, but the baseline still has **24.8% lower MAE**
+than the expanding forest. This is a retrospective observation-time comparison
+on a previously examined period; it does not simulate NHS publication delays or
+establish prospective accuracy. [Original exports](powerbi/legacy_fixed_fit/)
+preserve the fixed-fit results and explain the version boundary.
 
 The baseline performed better and is the preferred demonstration forecast: **535,580 emergency admissions for September 2026** as of August 2026. This is a historical as-of forecast; it is not a live prediction for the current month. MAE measures absolute forecast error; neither method is claimed to improve hospital outcomes.
 
 ## Outputs and Power BI
 
-`outputs/powerbi/` contains `monthly_demand.csv`, `quarterly_beds.csv`, `trust_beds_2026q2.csv`, `source_summary.csv`, `admissions_forecast_backtest.csv`, and `admissions_forecast_summary.csv`. A snapshot of these six aggregate exports is included in [`powerbi/data/`](powerbi/data/) for direct inspection. Five tables (all except the one-row validation-only `source_summary.csv`) feed the [three-page Power BI report](https://app.powerbi.com/groups/me/reports/1b968d56-f28b-4835-8f77-d6d0dac681f2), created and checked in October 2026. The live report is in a private Power BI workspace and requires workspace access. The [editable `.pbix`](powerbi/NHS-Emergency-Demand-Capacity-Analytics.pbix) contains a copy of the report and imported data. A [static PDF](powerbi/NHS-Emergency-Demand-Capacity-Analytics.pdf) and [page images](powerbi/images/) are also public; the [Power BI report notes](powerbi/BUILD_GUIDE.md) describe its visuals and how to rebuild it from the exports. Raw NHS files and the local SQLite database are not stored in Git; the importer downloads and rebuilds them from the cited sources.
+`outputs/powerbi/` contains `monthly_demand.csv`, `quarterly_beds.csv`, `trust_beds_2026q2.csv`, `source_summary.csv`, `admissions_forecast_backtest.csv`, and `admissions_forecast_summary.csv`. A snapshot of these six aggregate exports is included in [`powerbi/data/`](powerbi/data/) for direct inspection. The updated source preview embeds the current CSV snapshot and adds its own independent dimensions. The original [three-page Power BI report](https://app.powerbi.com/groups/me/reports/1b968d56-f28b-4835-8f77-d6d0dac681f2), created in October 2026, used five imports and retains the older fixed-fit forecasts. Its private workspace, [PBIX](powerbi/NHS-Emergency-Demand-Capacity-Analytics.pbix), [PDF](powerbi/NHS-Emergency-Demand-Capacity-Analytics.pdf) and [page images](powerbi/images/) have not been refreshed by this upgrade. The [report notes](powerbi/BUILD_GUIDE.md) distinguish those artifacts from the updated editable preview. Raw NHS files and the local SQLite database are not stored in Git; the importer downloads and rebuilds them from the cited sources.
 
 **Accurate resume wording:** “Analyzed NHS England emergency-admission trends, decision-to-admit delay counts, and published bed occupancy; compared next-month admission forecasts with a seasonal baseline and built a Power BI report to communicate the results.”
+
+## Updated Power BI source
+
+The [PBIP preview](powerbi/upgrade/README.md) includes 23 explicit DAX measures,
+three pages with 26 native visual definitions, independent demand/quarter/trust/
+evaluation selectors, and fixed interpretation panels. Single-quarter occupancy
+uses occupied/available beds; multiple complete quarters use a bed-day-weighted
+ratio. Selected trust occupancy uses the ratio of totals, never a sum of
+percentages. Missing prior-year coverage yields blank YoY measures.
+
+Four independent dimension relationships preserve the separate source grains.
+Native refresh, DAX execution, rendering and interaction checks are still
+required in Power BI Desktop for Windows before replacing the original report.

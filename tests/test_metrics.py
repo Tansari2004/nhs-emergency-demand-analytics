@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from forecast import make_features, run_forecast  # noqa: E402
+from forecast import make_features, run_forecast, expanding_predictions  # noqa: E402
 
 
 class ForecastTests(unittest.TestCase):
@@ -29,6 +29,28 @@ class ForecastTests(unittest.TestCase):
         self.assertEqual(summary["forecast_month"], "2026-09-01")
         self.assertEqual(len(backtest), 24)
         self.assertEqual(summary["next_month_baseline"], series.loc["2025-09-01"])
+        self.assertEqual(summary["evaluation_protocol"], "expanding_window_one_month_ahead")
+        self.assertEqual(summary["expanding_refits"], 24)
+        self.assertEqual(backtest.training_end.iloc[-1], "2026-07-01")
+        self.assertEqual(backtest.training_rows.iloc[-1] - backtest.training_rows.iloc[0], 23)
+
+    def test_future_outcomes_cannot_change_earlier_expanding_predictions(self):
+        dates = pd.date_range("2016-02-01", "2026-08-01", freq="MS")
+        series = pd.Series(450000 + 1000 * dates.month + np.arange(len(dates)) * 30, index=dates)
+        targets = pd.DatetimeIndex(["2024-09-01", "2024-10-01"])
+        before = expanding_predictions(make_features(series), targets)
+        series.loc["2024-10-01":] = 9999999
+        after = expanding_predictions(make_features(series), targets)
+        # October's target is not a feature; future outcomes cannot affect either prediction.
+        pd.testing.assert_frame_equal(before, after)
+
+    def test_missing_or_unsorted_months_are_rejected(self):
+        dates = pd.date_range("2016-02-01", "2026-08-01", freq="MS")
+        series = pd.Series(np.arange(len(dates)), index=dates)
+        with self.assertRaises(ValueError):
+            run_forecast(series.drop(dates[20]))
+        with self.assertRaises(ValueError):
+            run_forecast(series.iloc[::-1])
 
 
 if __name__ == "__main__":

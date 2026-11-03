@@ -28,6 +28,28 @@ def make_features(series: pd.Series) -> pd.DataFrame:
     return frame
 
 
+def new_model() -> RandomForestRegressor:
+    return RandomForestRegressor(
+        n_estimators=300, min_samples_leaf=3, max_features=0.8, random_state=42, n_jobs=1
+    )
+
+
+def expanding_predictions(frame: pd.DataFrame, targets: pd.DatetimeIndex) -> pd.DataFrame:
+    """Refit at each origin using only observations preceding its target month."""
+    rows = []
+    for target in targets:
+        training = frame.loc[frame.index < target].dropna(subset=["actual", *FEATURES])
+        if training.empty or training.index.max() >= target:
+            raise ValueError("Forecast training must end before the target month")
+        model = new_model()
+        model.fit(training[FEATURES], training.actual)
+        prediction = float(model.predict(frame.loc[[target], FEATURES])[0])
+        rows.append({"month": target.strftime("%Y-%m-%d"),
+                     "training_end": training.index.max().strftime("%Y-%m-%d"),
+                     "training_rows": len(training), "model_forecast": prediction})
+    return pd.DataFrame(rows)
+
+
 def run_forecast(series: pd.Series) -> tuple[pd.DataFrame, dict]:
     if series.isna().any() or not series.index.equals(pd.date_range(series.index.min(), series.index.max(), freq="MS")):
         raise ValueError("Admissions must have one observation for every consecutive month")
@@ -38,24 +60,25 @@ def run_forecast(series: pd.Series) -> tuple[pd.DataFrame, dict]:
     test = frame.loc[frame.index >= TEST_START].dropna(subset="actual")
     if len(train) < 80 or len(test) != 24:
         raise ValueError("Unexpected chronological forecast split")
-    model = RandomForestRegressor(
-        n_estimators=300, min_samples_leaf=3, max_features=0.8, random_state=42, n_jobs=1
-    )
+    model = new_model()
     model.fit(train[FEATURES], train.actual)
-    predicted = model.predict(test[FEATURES])
+    fixed_predicted = model.predict(test[FEATURES])
+    expanding = expanding_predictions(frame, test.index)
+    predicted = expanding.model_forecast.to_numpy()
     baseline = test.lag_12.to_numpy()
     backtest = pd.DataFrame({
         "month": test.index.strftime("%Y-%m-%d"),
         "actual_admissions": test.actual.astype(int).to_numpy(),
         "seasonal_baseline": np.round(baseline, 1),
         "model_forecast": np.round(predicted, 1),
+        "fixed_fit_model_forecast": np.round(fixed_predicted, 1),
+        "training_end": expanding.training_end.to_numpy(),
+        "training_rows": expanding.training_rows.to_numpy(),
     })
     baseline_mae = float(mean_absolute_error(test.actual, baseline))
     model_mae = float(mean_absolute_error(test.actual, predicted))
     final_train = frame.loc[:series.index.max()].dropna(subset="actual")
-    final_model = RandomForestRegressor(
-        n_estimators=300, min_samples_leaf=3, max_features=0.8, random_state=42, n_jobs=1
-    )
+    final_model = new_model()
     final_model.fit(final_train[FEATURES], final_train.actual)
     next_model = float(final_model.predict(frame.loc[[next_month], FEATURES])[0])
     next_baseline = float(frame.loc[next_month, "lag_12"])
@@ -69,6 +92,9 @@ def run_forecast(series: pd.Series) -> tuple[pd.DataFrame, dict]:
         "test_months": len(test),
         "baseline_mae": baseline_mae,
         "model_mae": model_mae,
+        "fixed_fit_model_mae": float(mean_absolute_error(test.actual, fixed_predicted)),
+        "evaluation_protocol": "expanding_window_one_month_ahead",
+        "expanding_refits": len(expanding),
         "final_training_end": final_train.index.max().strftime("%Y-%m-%d"),
         "next_month_baseline": next_baseline,
         "next_month_model": next_model,

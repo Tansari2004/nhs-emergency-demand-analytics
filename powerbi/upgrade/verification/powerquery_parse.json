@@ -1,0 +1,42 @@
+{
+  "parser": "@microsoft/powerquery-parser 4.0.1",
+  "runtimeEvaluated": false,
+  "results": [
+    {
+      "table": "DemandMonth",
+      "ok": true
+    },
+    {
+      "table": "MonthlyDemand",
+      "ok": true
+    },
+    {
+      "table": "BedQuarter",
+      "ok": true
+    },
+    {
+      "table": "QuarterlyBeds",
+      "ok": true
+    },
+    {
+      "table": "DimTrust",
+      "ok": true
+    },
+    {
+      "table": "TrustSnapshot",
+      "ok": true
+    },
+    {
+      "table": "ForecastMonth",
+      "ok": true
+    },
+    {
+      "table": "Forecast",
+      "ok": true
+    },
+    {
+      "table": "Summary",
+      "ok": true
+    }
+  ]
+}

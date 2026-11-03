@@ -1,0 +1,289 @@
+{
+  "pages": [
+    {
+      "name": "Emergency demand",
+      "id": "eb7a0f864521bc7ed65d",
+      "width": 1440,
+      "height": 900,
+      "visuals": [
+        {
+          "name": "5469bc675a4a55ccf956",
+          "type": "textbox",
+          "x": 24,
+          "y": 18,
+          "z": 1000,
+          "tabOrder": 1000,
+          "width": 1392,
+          "height": 48
+        },
+        {
+          "name": "dc42f4361905541a38c0",
+          "type": "textbox",
+          "x": 24,
+          "y": 67,
+          "z": 2000,
+          "tabOrder": 2000,
+          "width": 1392,
+          "height": 30
+        },
+        {
+          "name": "debd268173ad0f03fcd3",
+          "type": "slicer",
+          "x": 24,
+          "y": 102,
+          "z": 3000,
+          "tabOrder": 3000,
+          "width": 680,
+          "height": 80
+        },
+        {
+          "name": "2508e4db3dd118821d34",
+          "type": "cardVisual",
+          "x": 24,
+          "y": 202,
+          "z": 4000,
+          "tabOrder": 4000,
+          "width": 1392,
+          "height": 104
+        },
+        {
+          "name": "fce44db6cdca338b07da",
+          "type": "lineChart",
+          "x": 24,
+          "y": 330,
+          "z": 5000,
+          "tabOrder": 5000,
+          "width": 680,
+          "height": 352
+        },
+        {
+          "name": "6e60135319c366f44dba",
+          "type": "lineChart",
+          "x": 728,
+          "y": 330,
+          "z": 6000,
+          "tabOrder": 6000,
+          "width": 688,
+          "height": 352
+        },
+        {
+          "name": "611afbd6b376f987deb1",
+          "type": "textbox",
+          "x": 24,
+          "y": 716,
+          "z": 7000,
+          "tabOrder": 7000,
+          "width": 1392,
+          "height": 118
+        },
+        {
+          "name": "ca208e77fc77c9d32e5d",
+          "type": "textbox",
+          "x": 24,
+          "y": 853,
+          "z": 8000,
+          "tabOrder": 8000,
+          "width": 1392,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "name": "Bed pressure and trust capacity",
+      "id": "136e10cb3029381c16ba",
+      "width": 1440,
+      "height": 900,
+      "visuals": [
+        {
+          "name": "d865ac8c325c4b061e42",
+          "type": "textbox",
+          "x": 24,
+          "y": 18,
+          "z": 1000,
+          "tabOrder": 1000,
+          "width": 1392,
+          "height": 48
+        },
+        {
+          "name": "6dbcff76846a35901cbf",
+          "type": "textbox",
+          "x": 24,
+          "y": 67,
+          "z": 2000,
+          "tabOrder": 2000,
+          "width": 1392,
+          "height": 30
+        },
+        {
+          "name": "92950a2f0a3a9992df82",
+          "type": "slicer",
+          "x": 24,
+          "y": 102,
+          "z": 3000,
+          "tabOrder": 3000,
+          "width": 680,
+          "height": 80
+        },
+        {
+          "name": "2f7f23664ac5bbbfaeab",
+          "type": "slicer",
+          "x": 728,
+          "y": 102,
+          "z": 4000,
+          "tabOrder": 4000,
+          "width": 688,
+          "height": 80
+        },
+        {
+          "name": "b9cda4e41d060842ba2e",
+          "type": "cardVisual",
+          "x": 24,
+          "y": 202,
+          "z": 5000,
+          "tabOrder": 5000,
+          "width": 1392,
+          "height": 104
+        },
+        {
+          "name": "bc21092a7057f4b4d5e6",
+          "type": "lineChart",
+          "x": 24,
+          "y": 330,
+          "z": 6000,
+          "tabOrder": 6000,
+          "width": 680,
+          "height": 352
+        },
+        {
+          "name": "7c9ee13f44dbdb33fa7e",
+          "type": "tableEx",
+          "x": 728,
+          "y": 330,
+          "z": 7000,
+          "tabOrder": 7000,
+          "width": 688,
+          "height": 352
+        },
+        {
+          "name": "a36af71b496abf4e7676",
+          "type": "textbox",
+          "x": 24,
+          "y": 716,
+          "z": 8000,
+          "tabOrder": 8000,
+          "width": 1392,
+          "height": 102
+        },
+        {
+          "name": "cc2ffe51a591bbff21ec",
+          "type": "textbox",
+          "x": 24,
+          "y": 853,
+          "z": 9000,
+          "tabOrder": 9000,
+          "width": 1392,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "name": "Forecast evaluation",
+      "id": "402e3ae3474af33c8daa",
+      "width": 1440,
+      "height": 900,
+      "visuals": [
+        {
+          "name": "d71ac84621a5f19f219c",
+          "type": "textbox",
+          "x": 24,
+          "y": 18,
+          "z": 1000,
+          "tabOrder": 1000,
+          "width": 1392,
+          "height": 48
+        },
+        {
+          "name": "379733cc96b4a1ec66c3",
+          "type": "textbox",
+          "x": 24,
+          "y": 67,
+          "z": 2000,
+          "tabOrder": 2000,
+          "width": 1392,
+          "height": 30
+        },
+        {
+          "name": "ec84aad48cb9b779c0bb",
+          "type": "slicer",
+          "x": 24,
+          "y": 102,
+          "z": 3000,
+          "tabOrder": 3000,
+          "width": 680,
+          "height": 80
+        },
+        {
+          "name": "54c406da55b2cff1e2df",
+          "type": "cardVisual",
+          "x": 24,
+          "y": 202,
+          "z": 4000,
+          "tabOrder": 4000,
+          "width": 1392,
+          "height": 104
+        },
+        {
+          "name": "687e8f3940615f7e90d3",
+          "type": "lineChart",
+          "x": 24,
+          "y": 330,
+          "z": 5000,
+          "tabOrder": 5000,
+          "width": 880,
+          "height": 330
+        },
+        {
+          "name": "e66db24edd1c3a58bea1",
+          "type": "clusteredColumnChart",
+          "x": 928,
+          "y": 330,
+          "z": 6000,
+          "tabOrder": 6000,
+          "width": 488,
+          "height": 330
+        },
+        {
+          "name": "baf43e127aad3fbb9db3",
+          "type": "tableEx",
+          "x": 24,
+          "y": 680,
+          "z": 7000,
+          "tabOrder": 7000,
+          "width": 680,
+          "height": 150
+        },
+        {
+          "name": "32dc2c266498d82b49c5",
+          "type": "textbox",
+          "x": 728,
+          "y": 690,
+          "z": 8000,
+          "tabOrder": 8000,
+          "width": 688,
+          "height": 140
+        },
+        {
+          "name": "bf5862912e299a5b06eb",
+          "type": "textbox",
+          "x": 24,
+          "y": 853,
+          "z": 9000,
+          "tabOrder": 9000,
+          "width": 1392,
+          "height": 26
+        }
+      ]
+    }
+  ],
+  "native_render_verified": false
+}

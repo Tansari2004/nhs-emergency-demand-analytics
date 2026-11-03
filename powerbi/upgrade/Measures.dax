@@ -1,0 +1,99 @@
+// Total across selected monthly observations.
+Admissions =
+SUM(MonthlyDemand[Admissions])
+
+// Matching months one year earlier; blank if any prior month is missing.
+Admissions Previous Year =
+VAR Months = VALUES(DemandMonth[Month])
+VAR PriorMonths = SELECTCOLUMNS(Months, "PriorMonth", EDATE(DemandMonth[Month], -12))
+VAR PriorCount = CALCULATE(COUNTROWS(MonthlyDemand), REMOVEFILTERS(DemandMonth), TREATAS(PriorMonths, DemandMonth[Month]))
+RETURN IF(COUNTROWS(Months) > 0 && PriorCount = COUNTROWS(Months),
+    CALCULATE([Admissions], REMOVEFILTERS(DemandMonth), TREATAS(PriorMonths, DemandMonth[Month])))
+
+// Count difference for matched month selections.
+Admissions YoY Change =
+IF(NOT ISBLANK([Admissions Previous Year]), [Admissions] - [Admissions Previous Year])
+
+// Relative change; missing/zero comparison stays blank.
+Admissions YoY Percent =
+DIVIDE([Admissions YoY Change], [Admissions Previous Year])
+
+// Count after decision to admit, not an average wait or all ED waits.
+Over 12 Hour Delays =
+SUM(MonthlyDemand[Over 12 hour delays])
+
+// All selected months must have corresponding prior-year observations.
+Delays Previous Year =
+VAR Months = VALUES(DemandMonth[Month])
+VAR PriorMonths = SELECTCOLUMNS(Months, "PriorMonth", EDATE(DemandMonth[Month], -12))
+VAR PriorCount = CALCULATE(COUNTROWS(MonthlyDemand), REMOVEFILTERS(DemandMonth), TREATAS(PriorMonths, DemandMonth[Month]))
+RETURN IF(COUNTROWS(Months) > 0 && PriorCount = COUNTROWS(Months),
+    CALCULATE([Over 12 Hour Delays], REMOVEFILTERS(DemandMonth), TREATAS(PriorMonths, DemandMonth[Month])))
+
+// Change in threshold counts, not hours of waiting.
+Delays YoY Change =
+IF(NOT ISBLANK([Delays Previous Year]), [Over 12 Hour Delays] - [Delays Previous Year])
+
+// Relative change in delay counts.
+Delays YoY Percent =
+DIVIDE([Delays YoY Change], [Delays Previous Year])
+
+// A single national quarter only; blank when multiple quarters are selected.
+Selected Quarter Occupancy =
+IF(HASONEVALUE(BedQuarter[Quarter end]), DIVIDE(SUM(QuarterlyBeds[Occupied beds]), SUM(QuarterlyBeds[Available beds])))
+
+// Across complete selected quarters, occupied bed-days / available bed-days. Never sum percentages.
+Bed Day Weighted Occupancy =
+DIVIDE(SUMX(QuarterlyBeds, QuarterlyBeds[Occupied beds] * QuarterlyBeds[Quarter days]), SUMX(QuarterlyBeds, QuarterlyBeds[Available beds] * QuarterlyBeds[Quarter days]))
+
+// Average available overnight beds in the fixed Apr-Jun 2026 snapshot.
+Trust Available Beds =
+SUM(TrustSnapshot[Available beds])
+
+// Average occupied beds for selected trusts; not admissions.
+Trust Occupied Beds =
+SUM(TrustSnapshot[Occupied beds])
+
+// Ratio of totals for selected trusts, not an average or sum of trust percentages.
+Trust Snapshot Occupancy =
+DIVIDE([Trust Occupied Beds], [Trust Available Beds])
+
+// Observed target over selected evaluation months.
+Observed Admissions =
+SUM(Forecast[Actual admissions])
+
+// Same month one year earlier.
+Seasonal Forecast =
+SUM(Forecast[Seasonal baseline])
+
+// Re-fitted before each target using earlier monthly observations.
+Expanding Forest Forecast =
+SUM(Forecast[Expanding forest])
+
+// Absolute errors summed over selected months.
+Seasonal Absolute Error =
+SUMX(Forecast, ABS(Forecast[Actual admissions] - Forecast[Seasonal baseline]))
+
+// Absolute errors summed over selected months.
+Forest Absolute Error =
+SUMX(Forecast, ABS(Forecast[Actual admissions] - Forecast[Expanding forest]))
+
+// Mean over selected test months; recomputes with the evaluation-date filter.
+Seasonal MAE =
+AVERAGEX(Forecast, ABS(Forecast[Actual admissions] - Forecast[Seasonal baseline]))
+
+// One-month-ahead expanding-window error, admissions/month.
+Expanding Forest MAE =
+AVERAGEX(Forecast, ABS(Forecast[Actual admissions] - Forecast[Expanding forest]))
+
+// Original forest held fixed after Aug 2024; comparison, not the expanding model.
+Fixed Fit Forest MAE =
+AVERAGEX(Forecast, ABS(Forecast[Actual admissions] - Forecast[Fixed fit forest]))
+
+// Number of selected test months.
+Evaluation Months =
+COUNTROWS(Forecast)
+
+// Full-period preferred September 2026 forecast as of August 2026; unaffected by evaluation slicer.
+Historical Next Forecast =
+MAX(Summary[Next forecast])
